@@ -1,6 +1,7 @@
 class CalcController {
     
     constructor(){
+        this._locale = 'pt-BR';
         this._displayCalcEl = document.querySelector("#display");
         this._dateEl = document.querySelector("#data");
         this._timeEl = document.querySelector("#hora");
@@ -9,21 +10,34 @@ class CalcController {
     }
 
     initialize(){
-        this._dateEl.innerHTML = "22/08/22";
-        this._timeEl.innerHTML = "22:25";
+
+        this.setDisplayDateTime();
+
+        setInterval(()=>{
+            this.setDisplayDateTime();
+        }, 1000);
     }
 
-    get dateEl(){
+    setDisplayDateTime(){
+        this.displayDate = this.currentDate.toLocaleDateString(this._locale, {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+        });
+        this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
+    }
+
+    get displayDate(){
         return this._dateEl.innerHTML;
     }
-    set dateEl(value){
+    set displayDate(value){
         this._dateEl.innerHTML = value;
     }
 
-    get timeEl(){
+    get displayTime(){
         return this._timeEl.innerHTML;
     }
-    set timeEl(value){
+    set displayTime(value){
         this._timeEl.innerHTML = value;
     }
     //Recupera o valor presente em displayCalc
@@ -35,11 +49,11 @@ class CalcController {
         this._displayCalcEl.innerHTML = value;
     }
     // -------------------- 
-    get dataAtual(){
-        return this._currentDate;
+    get currentDate(){
+        return new Date();
     }
 
-    set dataAtual(value){
+    set currentDate(value){
         this._currentDate = value;
     }
 
