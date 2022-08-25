@@ -35,7 +35,22 @@ class CalcController {
         this._operation.pop();
     }
 
+    getLastOperation(){
+        return this._operation[this._operation.length-1];
+    }
+
     addOperation(value){
+        //verificar se o valor é um numero ou não para concatenar no array ou senão seguir com 
+        // a realização da operação ou inclusão do ponto se for o caso.
+        if(isNaN(this.getLastOperation())){
+            // se não for um numero...
+        } else{
+            // se for um número
+            let newValue = this.getLastOperation.toString() + value.toString();
+            this._operation.push(newValue);
+        }
+
+
         this._operation.push(value);
         console.log(this._operation);
     }
@@ -69,6 +84,9 @@ class CalcController {
 
                 break;
             case 'igual':
+
+                break;
+            case 'ponto':
 
                 break;
 
